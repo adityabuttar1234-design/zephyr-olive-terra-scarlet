@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-background: #0e0d0b;
+  --color-foreground: #f3efe6;
+  --color-card: #161512;
+  --color-card-foreground: #f3efe6;
+  --color-muted: #1e1c18;
+  --color-muted-foreground: #9c9588;
+  --color-border: #2c2a24;
+  --color-primary: #e8e1d4;
+  --color-primary-foreground: #12110f;
+  --color-secondary: #1e1c18;
+  --color-secondary-foreground: #f3efe6;
+  --color-accent: #24211c;
+  --color-accent-foreground: #f3efe6;
+  --color-destructive: #c45c4a;
+  --color-stamp: #c45c4a;
+  --color-paper: #efe8d8;
+  --color-paper-ink: #1a1814;
+  --color-good: #8faf78;
+  --color-warn: #d4b56a;
+  --color-ring: #e8e1d4;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    background: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-stamp) 70%, black);
+    color: var(--color-foreground);
+  }
+}
+
+@layer components {
+  .paper-chit {
+    background-color: var(--color-paper);
+    color: var(--color-paper-ink);
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 27px,
+        color-mix(in oklab, var(--color-paper-ink) 7%, transparent) 28px
+      ),
+      radial-gradient(
+        120% 80% at 100% 0%,
+        color-mix(in oklab, var(--color-stamp) 8%, transparent),
+        transparent 55%
+      );
+  }
+
+  .hairline {
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-foreground) 12%, transparent);
+  }
+
+  .stamp-mark {
+    font-family: var(--font-display);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 2px solid currentColor;
+    padding: 0.35rem 0.65rem;
+    line-height: 1;
+    transform: rotate(-8deg);
+    color: var(--color-stamp);
+    opacity: 0.88;
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rise-in-2 {
+  animation: rise-in 400ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+}
+
+.rise-in-3 {
+  animation: rise-in 400ms cubic-bezier(0.22, 1, 0.36, 1) 140ms both;
+}
+
+.rise-in-4 {
+  animation: rise-in 400ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+}
